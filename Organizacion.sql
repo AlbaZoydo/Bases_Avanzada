@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS pl1.estudiantes(
         estudiante_id SERIAL,
         nombre TEXT,
         codigo_carrera int,
+        edad int,
         indice int
 );
 
