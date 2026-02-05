@@ -1,0 +1,8 @@
+-- Borrar 5 millones de tuplas aleatorias
+DELETE FROM pl1.estudiantes
+WHERE estudiante_id IN (
+    SELECT estudiante_id
+    FROM pl1.estudiantes
+    ORDER BY random()
+    LIMIT 5000000
+);
