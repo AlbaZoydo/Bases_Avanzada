@@ -19,7 +19,5 @@ def generar_datos(i):
 with open(OUTPUT_FILE, "w") as archivo: 
     for i in range(1,TOTAL+1):
         datos_generados = generar_datos(i)
-        for j, valor in enumerate(datos_generados):
-            archivo.write(str(valor))
-            archivo.write(",")
-        archivo.write("\n")
+        linea = ",".join(str(v) for v in datos_generados) #para quitar la coma del final
+        archivo.write(linea + "\n")
