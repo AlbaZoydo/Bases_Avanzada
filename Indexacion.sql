@@ -1,6 +1,6 @@
 /*Tabla 4, se pone como tabla 2 en el pdf*/
 
-CREATE TABLE pl1.estudiantes4 (
+CREATE TABLE IF NOT EXISTS pl1.estudiantes4 (
     estudiante_id TEXT,
     nombre TEXT,
     codigo_carrera INT,
