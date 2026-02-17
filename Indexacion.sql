@@ -30,10 +30,10 @@ CREATE INDEX idx_estudiantes4_hash_in ON pl1.estudiantes4 USING HASH (indice);
 /*Ordeno*/
 CLUSTER pl1.estudiantes4 USING idx_estudiantes4;*/
 
-\echo 'Tabla'
-SELECT * FROM pgstatindex('idx_estudiantes4_est_id');
+/*\echo 'Tabla'
+SELECT * FROM pgstatindex('idx_estudiantes4_est_id');*/
 COMMIT;
-SELECT pg_relation_size('pl1.idx_estudiantes4_est_id'::regclass);
+/*SELECT pg_relation_size('pl1.idx_estudiantes4_est_id'::regclass);*/
 
 /* Precisan de extension, habria que ver si se puede
 SELECT pgstatindex('pl1.idx_estudiantes4_est_id'::regclass)
