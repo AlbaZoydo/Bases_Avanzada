@@ -1,6 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS musicos;
 SET search_path TO musicos, public;
-/*
+
 CREATE TABLE IF NOT EXISTS musicos.Grupos (
     Cod_grupo INTEGER PRIMARY KEY,
     Nombre TEXT NOT NULL,
@@ -9,10 +9,6 @@ CREATE TABLE IF NOT EXISTS musicos.Grupos (
     Webb TEXT NOT NULL
     
 );
-
-\echo 'Cargando'
-\COPY musicos.Grupos FROM './Grupos.csv' WITH (FORMAT csv,  HEADER true, DELIMITER E',', NULL '\N', ENCODING 'UTF-8');
-
 
 CREATE TABLE IF NOT EXISTS musicos.Musicos (
     Codigo_musico INTEGER PRIMARY KEY,
@@ -28,9 +24,6 @@ CREATE TABLE IF NOT EXISTS musicos.Musicos (
     FOREIGN KEY (Cod_grupo) REFERENCES musicos.Grupos(Cod_grupo)
 );
 
-\echo 'Cargando'
-\COPY musicos.Musicos FROM './musicos.csv' WITH (FORMAT csv,  HEADER true, DELIMITER E',', NULL '\N', ENCODING 'UTF-8');
-
 
 CREATE TABLE IF NOT EXISTS musicos.Discos (
     Cod_disco INTEGER PRIMARY KEY,
@@ -41,9 +34,6 @@ CREATE TABLE IF NOT EXISTS musicos.Discos (
     Cod_grupo INTEGER NOT NULL,
     FOREIGN KEY (Cod_grupo) REFERENCES musicos.Grupos(Cod_grupo)
 );
-\echo 'Cargando'
-\COPY musicos.Discos FROM './discos.csv' WITH (FORMAT csv,  HEADER true, DELIMITER E',', NULL '\N', ENCODING 'UTF-8');
-
 
 CREATE TABLE IF NOT EXISTS musicos.Canciones (
     Cod_cancion SERIAL PRIMARY KEY,
@@ -55,10 +45,6 @@ CREATE TABLE IF NOT EXISTS musicos.Canciones (
     FOREIGN KEY (Cod_disco) REFERENCES musicos.Discos(Cod_disco)
 );
 
-\echo 'Cargando'
-\COPY musicos.Canciones (Nombre, Compositor, Fecha_grabacion, Duracion, Cod_disco)   FROM './canciones.csv' WITH (FORMAT csv,  HEADER true, DELIMITER E',', NULL '\N', ENCODING 'UTF-8');
-
-
 
 CREATE TABLE IF NOT EXISTS musicos.Conciertos (
     Cod_concierto INTEGER PRIMARY KEY,
@@ -68,9 +54,6 @@ CREATE TABLE IF NOT EXISTS musicos.Conciertos (
     Recinto TEXT NOT NULL
 );
 
-\echo 'Cargando'
-\COPY musicos.Conciertos    FROM './concierto.csv' WITH (FORMAT csv,  HEADER true, DELIMITER E',', NULL '\N', ENCODING 'UTF-8');
-
 CREATE TABLE IF NOT EXISTS musicos.Relacion_grupo_concierto (
     Cod_grupo INTEGER,
     Cod_concierto INTEGER,
@@ -78,10 +61,6 @@ CREATE TABLE IF NOT EXISTS musicos.Relacion_grupo_concierto (
     FOREIGN KEY (Cod_grupo) REFERENCES musicos.Grupos(Cod_grupo),
     FOREIGN KEY (Cod_concierto) REFERENCES musicos.Conciertos(Cod_concierto)
 );
-
-\echo 'Cargando'
-\COPY musicos.Relacion_grupo_concierto    FROM './relacion_grupo_concierto.csv' WITH (FORMAT csv,  HEADER true, DELIMITER E',', NULL '\N', ENCODING 'UTF-8');
-*/
 
 CREATE TABLE IF NOT EXISTS musicos.Entradas (
     Cod_entrada INTEGER PRIMARY KEY,
@@ -91,9 +70,5 @@ CREATE TABLE IF NOT EXISTS musicos.Entradas (
     Cod_concierto INTEGER NOT NULL,
     FOREIGN KEY (Cod_concierto) REFERENCES musicos.Conciertos(Cod_concierto)
 );
-
-\echo 'Cargando'
-\COPY musicos.Entradas    FROM './entrada.csv' WITH (FORMAT csv,  HEADER true, DELIMITER E',', NULL '\N', ENCODING 'UTF-8');
-
 
 COMMIT;
