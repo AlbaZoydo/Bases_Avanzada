@@ -13,3 +13,6 @@ CREATE TABLE ValorC (
 INSERT INTO ValorA VALUES (40);
 INSERT INTO ValorB VALUES (50);
 INSERT INTO ValorC VALUES (60);
+--UPDATE musicos.ValorA SET A=40;
+--UPDATE musicos.ValorB SET B=50;
+--UPDATE musicos.ValorC SET C=60;

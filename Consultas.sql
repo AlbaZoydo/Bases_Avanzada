@@ -9,7 +9,7 @@ INSERT INTO musicos.Musicos VALUES (1, '1234567Q','Musico1', 'su casa', 98764, '
 create user musico1 with password '1';
 create user musico2 with password '2';
 create user musico3 with password '3';
-GRANT CONNECT ON DATABASE MUSICOS2 TO musico1, musico2, musico3;
+GRANT CONNECT ON DATABASE musicos2 TO musico1, musico2, musico3;
 GRANT USAGE ON SCHEMA musicos TO musico1, musico2, musico3;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA musicos TO musico1, musico2, musico3;
 */
@@ -32,12 +32,12 @@ SELECT m.DNI, g.Nombre FROM musicos.grupos as g JOIN musicos.Musicos as m ON g.C
 --Pregunta 15
 --Usuario1
 SELECT C FROM musicos.VALORC;
-UPDATE musicos.ValorC SET C=C/100
+UPDATE musicos.ValorC SET C=C/100;
 
 SELECT A FROM musicos.ValorA;
-UPDATE musicos.ValorC SET A=A+100;
+UPDATE musicos.ValorA SET A=A+100;
 
-UPDATE musicos.ValorC SET C=C-A;
+UPDATE musicos.ValorC SET C=C-(SELECT A FROM musicos.ValorA);
 
 
 --usuario2
@@ -45,19 +45,19 @@ SELECT B FROM musicos.ValorB;
 UPDATE musicos.ValorB SET B=B+200;
 
 SELECT C FROM musicos.VALORC;
-UPDATE musicos.ValorC SET C=B-C;
+UPDATE musicos.ValorC SET C=(SELECT B FROM musicos.ValorB)-C;
 
 SELECT C FROM musicos.VALORC;
-UPDATE musicos.ValorC SET C=B*30;
+UPDATE musicos.ValorC SET C=(SELECT B FROM musicos.ValorB)*30;
 --usuario3
 SELECT A FROM musicos.ValorA;
-UPDATE musicos.ValorA SET A=A*20;
+--UPDATE musicos.ValorA SET A=A*20;
 
 SELECT B FROM musicos.ValorB;
-UPDATE musicos.ValorA SET A=A-B;
+UPDATE musicos.ValorA SET A=(A*20)- (SELECT B FROM musicos.ValorB);
 
 SELECT C FROM musicos.VALORC;
-UPDATE musicos.ValorB SET B=A*C;
+UPDATE musicos.ValorB SET B=(SELECT A FROM musicos.ValorA)*(SELECT C FROM musicos.VALORC);
 
 
 COMMIT;
